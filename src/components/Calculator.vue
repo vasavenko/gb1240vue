@@ -22,6 +22,32 @@
       Ошибка!
       {{ error }}
     </div>
+
+    <div class="vir_keyboard">
+      <label
+        ><input type="checkbox" v-model="checked" />
+        Отобразить экранную клавиатуру
+      </label>
+      <br />
+      <br />
+      <div v-show="checked">
+        <button v-for="btn in 10" :key="btn" @click="enterNum(btn - 1)">
+          {{ btn - 1 }}
+        </button>
+        <button @click="backspace">←</button>
+        <div>
+          <br />
+          <label>
+            <input type="radio" id="one" value="operand1" v-model="picked" />
+            Операнд 1
+          </label>
+          <label>
+            <input type="radio" id="two" value="operand2" v-model="picked" />
+            Операнд 2
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,9 +61,9 @@ export default {
       result: 0,
       error: "",
       operations: ["+", "-", "*", "/", "**", "%"],
-      logs: {},
       checked: false,
       picked: "operand1",
+      checked: false,
     };
   },
   methods: {
@@ -85,6 +111,21 @@ export default {
         case "%":
           this.intDiv();
           break;
+      }
+    },
+
+    enterNum(btn) {
+      if (this.picked === "operand1") {
+        this.operand1 += String(btn);
+      } else {
+        this.operand2 += String(btn);
+      }
+    },
+    backspace() {
+      if (this.picked === "operand1") {
+        this.operand1 = this.operand1.slice(0, this.operand1.length - 1);
+      } else {
+        this.operand2 = this.operand2.slice(0, this.operand2.length - 1);
       }
     },
   },
