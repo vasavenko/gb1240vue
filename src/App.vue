@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header :class="[$style.header]">
+      My personal costs
+    </header>
+    <main>
+      <PaymentForm @add="DataAddet" />
+      <PaymentsList :items="paymentsList" />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import PaymentsList from './components/PaymentsList'
+import PaymentForm from './components/PaymentForm'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    PaymentsList,
+    PaymentForm,
+  },
+  data() {
+    return {
+      paymentsList: [
+        {
+          date: '21.09.2021',
+          category: 'Food',
+          price: 123,
+        },
+        {
+          date: '20.09.2021',
+          category: 'Food',
+          price: 456,
+        },
+        {
+          date: '19.09.2021',
+          category: 'Food',
+          price: 789,
+        },
+        {
+          date: '18.09.2021',
+          category: 'Food',
+          price: 0,
+        },
+      ],
+    }
+  },
+  methods: {
+    DataAddet(data) {
+      this.paymentsList.push(data)
+    },
+  },
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style module>
+.header {
+  font: 1em sans-serif;
+  font-size: 36px;
+  margin-bottom: 16px;
 }
 </style>
