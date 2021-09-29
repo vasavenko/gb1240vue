@@ -4,8 +4,8 @@
       My personal costs
     </header>
     <main>
-      <PaymentForm @add="DataAddet" />
-      <PaymentsList :items="paymentsList" />
+      <PaymentForm />
+      <PaymentsList />
     </main>
   </div>
 </template>
@@ -13,6 +13,9 @@
 <script>
 import PaymentsList from './components/PaymentsList'
 import PaymentForm from './components/PaymentForm'
+
+import { mapActions } from 'vuex'
+
 export default {
   name: 'App',
   components: {
@@ -21,35 +24,16 @@ export default {
   },
   data() {
     return {
-      paymentsList: [
-        {
-          date: '21.09.2021',
-          category: 'Food',
-          price: 123,
-        },
-        {
-          date: '20.09.2021',
-          category: 'Food',
-          price: 456,
-        },
-        {
-          date: '19.09.2021',
-          category: 'Food',
-          price: 789,
-        },
-        {
-          date: '18.09.2021',
-          category: 'Food',
-          price: 0,
-        },
-      ],
     }
   },
   methods: {
-    DataAddet(data) {
-      this.paymentsList.push(data)
-    },
+    ...mapActions ([
+      'fetchData'
+    ]),
   },
+  mounted () {
+    this.fetchData()
+  }
 }
 </script>
 
