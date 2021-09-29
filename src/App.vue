@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header :class="[$style.header]">
+      My personal costs
+    </header>
+    <main>
+      <PaymentForm />
+      <PaymentsList />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PaymentsList from './components/PaymentsList'
+import PaymentForm from './components/PaymentForm'
+
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PaymentsList,
+    PaymentForm,
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    ...mapActions ([
+      'fetchData'
+    ]),
+  },
+  mounted () {
+    this.fetchData()
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style module>
+.header {
+  font: 1em sans-serif;
+  font-size: 36px;
+  margin-bottom: 16px;
 }
 </style>
