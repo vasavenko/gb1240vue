@@ -1,28 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header :class="[$style.header]">
+      My personal costs
+      <!-- <router-link to="/dashboard">Dashboard</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/404">404</router-link> -->
+    </header>
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+    }
+  },
+  methods: {
+    ...mapActions ([
+      'fetchData'
+    ]),
+  },
+  mounted () {
+    this.fetchData()
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style module>
+.header {
+  font: 1em sans-serif;
+  font-size: 36px;
+  margin-bottom: 16px;
 }
 </style>
