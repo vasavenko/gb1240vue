@@ -44,22 +44,22 @@ export default new Vuex.Store({
             {
               date: '21.9.2021',
               category: 'Food',
-              price: 123,
+              price: 100,
             },
             {
               date: '20.9.2021',
-              category: 'Food',
-              price: 456,
+              category: 'Transport',
+              price: 100,
             },
             {
               date: '19.9.2021',
-              category: 'Food',
-              price: 789,
+              category: 'Education',
+              price: 100,
             },
             {
               date: '18.9.2021',
-              category: 'Food',
-              price: 150,
+              category: 'Entertaiment',
+              price: 100,
             },
           ])
         }, 2000)

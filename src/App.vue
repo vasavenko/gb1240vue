@@ -2,26 +2,22 @@
   <div id="app">
     <header :class="[$style.header]">
       My personal costs
+      <!-- <router-link to="/dashboard">Dashboard</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/404">404</router-link> -->
     </header>
     <main>
-      <PaymentForm />
-      <PaymentsList />
+      <router-view />
     </main>
   </div>
 </template>
 
 <script>
-import PaymentsList from './components/PaymentsList'
-import PaymentForm from './components/PaymentForm'
 
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: {
-    PaymentsList,
-    PaymentForm,
-  },
   data() {
     return {
     }
