@@ -24,7 +24,13 @@ export default new Vuex.Store({
     },
     addCategories (state, payload) {
       state.categoryList.push(payload)
-    }
+    },
+    savePaymentListEl (state, payload) {
+      state.paymentsList.splice(payload.index, 1, {date: payload.date, category: payload.category, price: payload.price})
+    },
+    dellPaymentListData (state, payload) {
+      state.paymentsList.splice(payload, 1)
+    },
   },
 
   getters: {
@@ -62,7 +68,7 @@ export default new Vuex.Store({
               price: 100,
             },
           ])
-        }, 2000)
+        }, 1000)
       })
       .then(res => {
         commit('setPaymentsListData',res)
