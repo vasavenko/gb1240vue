@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="display">
-      <input type="number" v-model.number="operand1" />
-      <input type="number" v-model.number="operand2" />
+    <div>
+      <input type="number" v-model.number="operand1" name="operand1" />
+      <input type="number" v-model.number="operand2" name="operand2"/>
       = {{ result }}
-      <br />
     </div>
 
     <div class="keyboard">
@@ -12,6 +11,7 @@
         v-for="operation in operations"
         :key="operation"
         :disabled="operand1 === '' || operand2 === ''"
+        :name="operation"
         @click="calculate(operation)"
       >
         {{ operation }}
@@ -31,18 +31,18 @@
       <br />
       <br />
       <div v-show="checked">
-        <button v-for="btn in 10" :key="btn" @click="enterNum(btn - 1)">
+        <button v-for="btn in 10" :key="btn" @click="enterNum(btn - 1)" :name="btn-1">
           {{ btn - 1 }}
         </button>
-        <button @click="backspace">←</button>
+        <button @click="backspace" name="E">←</button>
         <div>
           <br />
           <label>
-            <input type="radio" id="one" value="operand1" v-model="picked" />
+            <input type="radio" id="one" value="operand1" v-model="picked" name="oper1"/>
             Операнд 1
           </label>
           <label>
-            <input type="radio" id="two" value="operand2" v-model="picked" />
+            <input type="radio" id="two" value="operand2" v-model="picked" name="oper2"/>
             Операнд 2
           </label>
         </div>
@@ -56,14 +56,13 @@ export default {
   name: "Calculator",
   data() {
     return {
-      operand1: "",
-      operand2: "",
+      operand1: 0,
+      operand2: 0,
       result: 0,
       error: "",
       operations: ["+", "-", "*", "/", "**", "%"],
       checked: false,
-      picked: "operand1",
-      checked: false,
+      picked: "operand1"
     };
   },
   methods: {
@@ -117,6 +116,7 @@ export default {
     enterNum(btn) {
       if (this.picked === "operand1") {
         this.operand1 += String(btn);
+        console.log(this.operand1)
       } else {
         this.operand2 += String(btn);
       }
