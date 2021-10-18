@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <!-- <v-system-bar app>SYS</v-system-bar> -->
+    <v-app-bar app flat>
+      <v-btn :ripple="false" plain to="/dashboard">Dashboard</v-btn>
+      <v-btn :ripple="false" plain to="/about">About</v-btn>
+      <v-btn :ripple="false" plain to="/404">404</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data: () => ({
+    //
+  }),
+  methods: {
+    ...mapActions ([
+      'fetchData'
+    ]),
+  },
+  mounted () {
+    this.fetchData()
   }
-}
+};
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
