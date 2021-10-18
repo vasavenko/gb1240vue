@@ -1,8 +1,8 @@
 <template>
   <div :class="[$style.wrp]" >
-    <button :class="[$style.btn]" @click="formVisible">
+    <v-btn class="text-capitalize my-2" color="teal" dark :class="[$style.btn]" @click="formVisible">
       BACK 
-    </button>
+    </v-btn>
 
     <div :class="[$style.addForm]" v-if="addForm">
       <input :class="[$style.inp]" placeholder="Payment date" v-model="date" />
@@ -14,13 +14,13 @@
       </select>
 
       <input :class="[$style.inp]" type="number" placeholder="Payment amount" v-model.number.lazy="price" />
-      <button :class="[$style.addbtn]" @click="save">
+      <v-btn class="text-capitalize my-2" color="teal" dark :class="[$style.addbtn]" @click="save">
         ADD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +
-      </button>
+      </v-btn>
 
-      <button :class="[$style.btnCat]" @click="formCategory">
+      <v-btn class="text-capitalize my-2" color="teal" dark :class="[$style.btnCat]" @click="formCategory">
         NEW CATEGORY +
-      </button>
+      </v-btn>
     </div>
 
     <div :class="[$style.addCategory]" v-if="addCategoriesForm">

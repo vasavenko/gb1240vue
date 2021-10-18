@@ -1,34 +1,27 @@
 <template>
-  <div id="app">
-    <header :class="[$style.header]">
-      My personal costs
-      <!-- <router-link to="/dashboard">Dashboard</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/404">404</router-link> -->
-    </header>
-    <main>
-      <transition name='fade'>
-        <Modal />
-      </transition>
+  <v-app>
+    <!-- <v-system-bar app>SYS</v-system-bar> -->
+    <v-app-bar app flat>
+      <v-btn :ripple="false" plain to="/dashboard">Dashboard</v-btn>
+      <v-btn :ripple="false" plain to="/about">About</v-btn>
+      <v-btn :ripple="false" plain to="/404">404</v-btn>
+    </v-app-bar>
+
+    <v-main>
       <router-view />
-    </main>
-  </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 
 import { mapActions } from 'vuex'
-import Modal from './components/modalwindows/Modal.vue'
 
 export default {
   name: 'App',
-  components: {
-    Modal
-  },
-  data() {
-    return {
-    }
-  },
+  data: () => ({
+    //
+  }),
   methods: {
     ...mapActions ([
       'fetchData'
@@ -37,23 +30,5 @@ export default {
   mounted () {
     this.fetchData()
   }
-}
+};
 </script>
-
-<style module>
-.header {
-  font: 1em sans-serif;
-  font-size: 36px;
-  margin-bottom: 16px;
-}
-:global(.fade-enter) {
-  opacity: 0;
-}
-:global(.fade-enter-active) {
-  transition: opacity 1s;
-}
-:global(.fade-leave) {
-  opacity: 0;
-}
-
-</style>

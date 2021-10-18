@@ -1,21 +1,29 @@
 <template>
   <div>
+    <div class="text-h5 text-md-h4 my-2">My personal costs</div>
     <div>
-      <router-link :class="[$style.btn]" to="/add/payment">ADD NEW COST &nbsp;&nbsp;+</router-link>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment">ADD NEW COST<v-icon small>mdi-plus</v-icon> </v-btn>
     </div>
 
     <div >
-      <router-link :class="[$style.btn]" to="/add/payment/Food?value=1000">Food - 1000</router-link>
-      <router-link :class="[$style.btn]" to="/add/payment/Transport?value=50">Transport - 50</router-link>
-      <router-link :class="[$style.btn]" to="/add/payment/Entertaiment?value=2000">Entertaiment - 2000</router-link>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Food?value=1000">Food - 1000</v-btn>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Transport?value=50">Transport - 50</v-btn>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Entertaiment?value=2000">Entertaiment - 2000</v-btn>
     </div>
     <div >
-      <router-link :class="[$style.btn]" to="/add/payment/Food">Food</router-link>
-      <router-link :class="[$style.btn]" to="/add/payment/Transport">Transport</router-link>
-      <router-link :class="[$style.btn]" to="/add/payment/Entertaiment">Entertaiment</router-link>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Food">Food</v-btn>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Transport">Transport</v-btn>
+      <v-btn class="text-capitalize my-2" color="teal" dark to="/add/payment/Entertaiment">Entertaiment</v-btn>
     </div>
 
-    <table :class="[$style.table]">
+    <v-data-table
+      :headers="tabHeaders"
+      :items="listWithIndex"
+    >
+
+    </v-data-table>
+
+    <!-- <table :class="[$style.table]">
       <tbody>
         <tr :class="[$style.tr]">
           <td><b>#&nbsp;</b></td>
@@ -34,13 +42,13 @@
           <td> <button :class="[$style.dot]" @click="showEditMenu($event,index)">⠇</button> </td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
-    <Pagination :length='getPaymentsList.length' 
+    <!-- <Pagination :length='getPaymentsList.length' 
       :perPage='perPage' 
       :curPage='page'
       @paginate='onPaginate'
-    />
+    /> -->
   </div>
 </template>
 
@@ -58,11 +66,23 @@ export default {
     page: 1,
     perPage: 10,
     addForm: false,
+    tabHeaders: [
+      { text: '#', value: 'index', width: '5%' },
+      { text: 'Date', value: 'date', width: '10%'},
+      { text: 'Category', value: 'category', width: '55%'},
+      { text: 'Value', value: 'price', width: '30%'},
+    ]
 
     }
   },
   computed: {
     ...mapGetters(['getPaymentsList', 'getCategoryList']),
+    listWithIndex (){
+      return this.getPaymentsList.map((obj, i) => {
+        obj.index = i + 1
+        return obj
+      })
+    },
     curentPage () {
       const { page, perPage } = this
       return this.getPaymentsList.slice(perPage*(page-1), perPage*(page-1)+perPage )
